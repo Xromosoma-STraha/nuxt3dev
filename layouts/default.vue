@@ -7,12 +7,14 @@
         </div>
     </section>    
     <Footer class="fixed-bottom"/>
+    
 </template>
 
 <script setup lang="ts">
     import Header from '~/components/Header.vue';
     import Footer from '~/components/Footer.vue';
     import Sidebar from '~/components/Sidebar.vue';
+    
 </script>
 
 <style scoped>

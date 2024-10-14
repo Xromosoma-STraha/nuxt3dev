@@ -4,10 +4,15 @@
             <NuxtImg src="/logo.jpg" alt="" width="100px" class="mx-auto"/>
         </NuxtLink>
 
-        <UiButton>сосал?</UiButton>
+        <button class="absolute top-2 right-3 transition-colors hover:text-primary">
+            <Icon name="solar:logout-2-outline" size="20px"/>
+        </button>
+        <Menu/>
     </aside>
+    
 </template>
 
 <script setup lang="ts">
-
+   
+    
 </script>
