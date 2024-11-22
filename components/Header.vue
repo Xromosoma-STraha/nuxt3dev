@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-blue-400">
-    <p>а это хедер</p>
+  <div class="bg-blue-400 h-8 flex items-center justify-center  text-white">
+    
   </div>
   
 </template>

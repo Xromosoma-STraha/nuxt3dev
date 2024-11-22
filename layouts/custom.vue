@@ -6,7 +6,7 @@
             <slot/>           
         </div>
     </section>    
-    <Footer class="fixed-bottom"/>
+    <Footer/>
     
 </template>
 
@@ -18,13 +18,7 @@
 </script>
 
 <style scoped>
-    .fixed-bottom {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 10;
-    }
+    
     .grid{
         display: grid;
         grid-template-columns: 1fr 6fr;
