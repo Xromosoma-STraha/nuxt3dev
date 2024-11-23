@@ -21,6 +21,7 @@
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "jsonwebtoken": "^9.0.2",
     "nuxt": "^3.13.0",
     "pinia": "^2.2.6",
     "radix-vue": "^1.9.7",
