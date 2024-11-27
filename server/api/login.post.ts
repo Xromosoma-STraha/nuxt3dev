@@ -45,7 +45,7 @@ export default defineEventHandler(async (event) => {
 
     // Возвращаем JSON ответ с информацией об успешной авторизации
 		event.node.res.statusCode = 200; // устанавливаем статус код 200
-    return { message: 'Login successful', userId: user.idU};
+    return { message: 'Login successful', userId: user.idU,token};
   } catch (error) {
     console.error(error);
 
