@@ -41,7 +41,7 @@ export default defineEventHandler(async (event) => {
     const token = jwt.sign({ userId: user.idU}, secretKey)
     
     // Устанавливаем токен в HTTP-only cookie
-    setHeader(event, 'Set-Cookie', `token=${token}; HttpOnly; Secure; SameSite=Strict; Path=/;`);
+    setHeader(event, 'Set-Cookie', `token=${token}; HttpOnly; Secure; SameSite=Strict; Path=/;Max-Age=${60 * 60 * 24 * 7}`);
 
     // Возвращаем JSON ответ с информацией об успешной авторизации
 		event.node.res.statusCode = 200; // устанавливаем статус код 200

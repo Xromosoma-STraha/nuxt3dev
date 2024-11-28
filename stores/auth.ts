@@ -17,7 +17,7 @@ export const useAuthStore = defineStore('auth', {
             useCookie('token').value = token
         },
         checkAuth(){
-             const cookie = useCookie('token');
+             const cookie = useCookie('token',{maxAge: 60*60*24*7});
             const token = cookie.value;
             if(token){
                 this.isAuthenticated = true
