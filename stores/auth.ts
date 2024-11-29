@@ -9,43 +9,47 @@ export const useAuthStore = defineStore('auth', {
   }),
   getters: {
     getToken: (state) => state.token
-        // можно добавить другие геттеры, например, для получения имени пользователя
   },
-    actions:{
-        setToken(token: string | null){
-            this.token = token;
-            useCookie('token').value = token
-        },
-        checkAuth(){
-             const cookie = useCookie('token',{maxAge: 60*60*24*7});
-            const token = cookie.value;
-            if(token){
-                this.isAuthenticated = true
-                  this.token = token;
+  actions: {
+    setToken(token: string | null) {
+      this.token = token;
+      useCookie('token').value = token; //maxAge: 60 * 60 * 24 * 7
+    },
+    checkAuth() {
+      const cookie = useCookie('token'); // maxAge устанавливается при Set-Cookie на backend
+      const token = cookie.value;
+
+      if (token) {
+          try {
+              const decodedToken: any = jwtDecode(token);
+              // Проверяем срок действия токена только если он есть
+              if (decodedToken.exp * 1000 > Date.now()) {
+                  this.isAuthenticated = true;
+                  this.token = token;                  
+              } else {
+                  // Если токен просрочен, выходим
+                  this.logout();
+              }
+          } catch (error) {
+              console.error("Ошибка декодирования токена:", error);
+              this.logout();
+          }
+      }      
+    },
+      async logout() {
                 try{
-                    const decodedToken: any = jwtDecode(token);
-                    if(decodedToken.exp * 1000 > Date.now()){
-                        this.isAuthenticated = true;
-                          this.token = token;
-                    }
-                    else{
-                        this.logout()
-                    }
-                }
-                catch(error){
-                    console.log(error);
-                    this.logout()
-                }
-            }
-        },
-        login(token:string){
-            this.setToken(token)
-            this.isAuthenticated = true
-        },
-        logout(){
-            this.isAuthenticated = false
-            this.user = null
-            this.setToken(null)
+            await $fetch('/api/logout', { method: 'POST' });  // Запрос на сервер для удаления cookie          
+              this.isAuthenticated = false;
+              this.user = null;
+              this.setToken(null);                    
         }
-    }
-})
+                 catch(error){
+                      console.log("Logout failed", error)
+                 }        
+    },    
+    login(token: string) {
+      this.setToken(token);
+      this.isAuthenticated = true;
+    }        
+  }
+});
