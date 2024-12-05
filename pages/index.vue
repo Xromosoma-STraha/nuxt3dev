@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import TrainingMap from '~/components/TrainingMap.vue';
+
+
+
   definePageMeta({
   layout: 'custom',
   middleware:'auth'
@@ -8,11 +12,10 @@
 
 <template>
   <div>
-    <p>Пососи</p>
-    
+    <TrainingMap/>
   </div>
 </template>
 
-<style scoped>
+<style >
 
 </style>
