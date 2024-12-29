@@ -6,7 +6,7 @@
       @mouseleave="isSidebarOpen = false"
   >
       <NuxtLink to="/" class="mb-10 block">
-          <NuxtImg src="/logo.jpg" alt="" width="100px" class="mx-auto" :class="{'sidebar-open': isSidebarOpen }"/>
+          <NuxtImg src="/ava.jpg" alt="" width="100px" class="mx-auto rounded-full" />
       </NuxtLink>
 
       <button @click="logout" class="absolute top-2 right-3 transition-colors hover:text-primary">
@@ -18,11 +18,11 @@
           </div>
        </div>
       <div class="sidebar-content" :class="{ 'sidebar-open': isSidebarOpen }">
-             <div v-if="userData">
-              <img v-if="userData.avatarUrl" :src="userData.avatarUrl" alt="avatar" class="user-avatar"/>
-              <p>{{ userData.firstName }} {{userData.lastName}}</p>
-              <p>ID: {{userData.id}}</p>
-             </div>
+            <div v-if="userData" class="user-info">
+               <img v-if="userData.avatarUrl" :src="userData.avatarUrl" alt="avatar" class="user-avatar mx-auto"/>
+              <p class="user-name text-center">{{ userData.firstName }} {{userData.lastName}}</p>
+              <p class="user-id text-center">ID: {{userData.id}}</p>
+            </div>
          <Menu/>
       </div>
   </aside>
@@ -96,6 +96,8 @@ await router.push('/loginpage'); // Перенаправляем на стран
   overflow: hidden;
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
+   display: flex;
+  flex-direction: column;
 }
 .sidebar-open .sidebar-content {
   opacity: 1;
@@ -105,12 +107,8 @@ await router.push('/loginpage'); // Перенаправляем на стран
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 20px;
-  opacity:0;
+   margin-bottom: 10px;
   transition: opacity 0.2s ease-in-out;
-}
-.sidebar-open .user-avatar{
-    opacity:1;
 }
 .menu-icons{
 display: flex;
@@ -119,7 +117,21 @@ flex-direction: column;
   gap:15px;
   transition: opacity 0.2s ease-in-out;
 }
-
+.user-info{
+  margin-bottom:20px;
+   display: flex;
+  flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.user-name{
+  font-size: 18px;
+    margin-top: 10px;
+}
+.user-id{
+  font-size: 12px;
+  opacity: 0.7;
+}
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;

@@ -3,11 +3,11 @@ import TrainingMap from '~/components/TrainingMap.vue';
 
 
 
-  definePageMeta({
+definePageMeta({
   layout: 'custom',
   middleware:'auth'
 
-})
+})  
 </script>
 
 <template>
