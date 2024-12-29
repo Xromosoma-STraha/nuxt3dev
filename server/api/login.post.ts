@@ -38,14 +38,14 @@ export default defineEventHandler(async (event) => {
     }
 
     
-    const token = jwt.sign({ userId: user.idU}, secretKey,{expiresIn: '7d'})
+    const token = jwt.sign({ idU: user.idU}, secretKey,{expiresIn: '7d'})
     
     // Устанавливаем токен в HTTP-only cookie
-    setHeader(event, 'Set-Cookie', `token=${token}; HttpOnly; ${process.env.NODE_ENV === 'production' ? ' Secure;' : ''}; SameSite=Strict; Path=/;Max-Age=${60 * 60 * 24 * 7}`);
+    setHeader(event, 'Set-Cookie', `token=${token}; ${process.env.NODE_ENV === 'production' ? ' Secure;' : ''}; SameSite=Strict; Path=/;Max-Age=${60 * 60 * 24 * 7}`);
 
     // Возвращаем JSON ответ с информацией об успешной авторизации
 		event.node.res.statusCode = 200; // устанавливаем статус код 200
-    return { message: 'Login successful', userId: user.idU,token};
+    return { message: 'Login successful', token}; // userId можно убрать, так как idU уже есть в токене
   } catch (error) {
     console.error(error);
 

@@ -64,20 +64,17 @@
         },
       });
       console.log(data)
-      if (data?.userId) {
-        
+      if (data?.token) {        
         authStore.login(data.token);
         console.log("Перед navigateTo('/')");
-        await navigateTo('/'); // <-- await здесь важен!
-        console.log("После navigateTo('/')"); // Эта строка не должна выполниться
+        await navigateTo('/');
+        console.log("После navigateTo('/')"); 
       } else {
-              // Обрабатываем как ошибку - нет userId в ответе
         console.error("Unexpected server response:", data);
         alert("Login failed. Unexpected server response.");
       }
     } catch (error: any) {
       console.error('Login error', error);
-          // Обрабатываем ошибку - выводим alert
       const errorMessage = error?.response?.data?.message || error.message || "Login failed"; // уточненный доступ к сообщению об ошибке
           alert(errorMessage);
     } finally {

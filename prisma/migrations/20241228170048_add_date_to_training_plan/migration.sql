@@ -3,6 +3,7 @@ CREATE TABLE "TrainingPlan" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT,
+    "date" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
 
     CONSTRAINT "TrainingPlan_pkey" PRIMARY KEY ("id")
@@ -20,8 +21,17 @@ CREATE TABLE "Exercise" (
     CONSTRAINT "Exercise_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "User" (
+    "idU" SERIAL NOT NULL,
+    "userName" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("idU")
+);
+
 -- CreateIndex
-CREATE UNIQUE INDEX "TrainingPlan_name_key" ON "TrainingPlan"("name");
+CREATE UNIQUE INDEX "User_userName_key" ON "User"("userName");
 
 -- AddForeignKey
 ALTER TABLE "TrainingPlan" ADD CONSTRAINT "TrainingPlan_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("idU") ON DELETE RESTRICT ON UPDATE CASCADE;
